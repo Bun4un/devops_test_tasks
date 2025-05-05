@@ -63,3 +63,7 @@ The `deploy.yaml` workflow does the following:
     - `FTP_PASSWORD`
 
 2. **On each commit to the main branch**, the GitHub Actions workflow will automatically deploy the files and update the `VERSION.txt` file.
+
+## Task #3: Ansible Playbook for Application Server Deployment
+
+Documentation and other filres are located in 'myproject-deployment'.
