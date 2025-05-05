@@ -62,6 +62,4 @@ The `deploy.yaml` workflow does the following:
     - `FTP_USERNAME`
     - `FTP_PASSWORD`
 
-2. The `deploy.yaml` file is already located in the `.github/workflows/` directory, so no further setup is required unless you need to modify the FTP server details.
-
-3. **On each commit to the main branch**, the GitHub Actions workflow will automatically deploy the files and update the `VERSION.txt` file.
+2. **On each commit to the main branch**, the GitHub Actions workflow will automatically deploy the files and update the `VERSION.txt` file.
