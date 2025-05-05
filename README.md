@@ -2,9 +2,6 @@
 
 This repository contains solutions for the DevOps test tasks. The tasks are related to Bash scripting, CI/CD, and automation using GitHub Actions, Ansible, and more.
 
-## Task #1: Debian Package Analyzer
-
-This task involves creating a Bash script to analyze `.deb` files and display package details and dependencies.
 For all files:
 **Clone the repository:**
 
@@ -12,6 +9,10 @@ For all files:
     git clone https://github.com/Bun4un/devops_test_tasks
     ```
 
+
+## Task #1: Debian Package Analyzer
+
+This task involves creating a Bash script to analyze `.deb` files and display package details and dependencies.
 
 ### Script Overview
 
