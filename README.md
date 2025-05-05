@@ -2,7 +2,6 @@
 
 This repository contains solutions for the DevOps test tasks. The tasks are related to Bash scripting, CI/CD, and automation using GitHub Actions, Ansible, and more.
 
-For all files:
 **Clone the repository:**
 
     ```bash
