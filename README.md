@@ -4,9 +4,9 @@ This repository contains solutions for the DevOps test tasks. The tasks are rela
 
 **Clone the repository:**
 
-    ```bash
+
     git clone https://github.com/Bun4un/devops_test_tasks
-    ```
+ 
 
 
 ## Task #1: Debian Package Analyzer
