@@ -1,0 +1,13 @@
+---
+- name: Deploy application stack
+  hosts: web 
+  become: true  
+  roles:
+    - django    
+    - nginx     
+
+- name: Deploy PostgreSQL
+  hosts: db 
+  become: true
+  roles:
+    - postgresql

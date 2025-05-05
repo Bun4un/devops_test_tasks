@@ -1,0 +1,12 @@
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Configure nginx for Django
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/sites-available/myapp
+
+- name: Enable nginx site
+  command: nginx -s reload

@@ -1,0 +1,22 @@
+- name: Install Python and pip
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - python3
+    - python3-pip
+
+- name: Install Django and DRF
+  pip:
+    name:
+      - django
+      - djangorestframework
+    state: present
+
+- name: Create Django project
+  command: django-admin startproject myapp
+
+  - name: Create Django app 'core'
+  command: python3 manage.py startapp core
+  args:
+    chdir: /path/to/myapp #change

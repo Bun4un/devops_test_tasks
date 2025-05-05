@@ -1,0 +1,16 @@
+- name: Install PostgreSQL
+  apt:
+    name: postgresql
+    state: present
+
+- name: Create database
+  postgresql_db:
+    name: myapp_db
+    state: present
+
+- name: Create PostgreSQL user
+  postgresql_user:
+    name: myapp_user
+    password: "secure_password"
+    db: myapp_db
+    state: present
