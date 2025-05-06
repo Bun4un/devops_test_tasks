@@ -60,12 +60,9 @@ Configure your Ansible inventory file (e.g., hosts) with your target server's IP
 ## Django Healthcheck API
 
 The django/healthcheck_urls.py file defines a simple healthcheck API endpoint that checks the operational status of the key components:
-
-    Nginx: Ensures the Nginx service is active.
-
-    Django: Verifies the Django application can connect to the PostgreSQL database.
-
-    PostgreSQL: Checks if PostgreSQL is running and accessible by Django.
+    - Nginx: Ensures the Nginx service is active.
+    - Django: Verifies the Django application can connect to the PostgreSQL database.
+    - PostgreSQL: Checks if PostgreSQL is running and accessible by Django.
 
 ## Healthcheck Endpoint
 
