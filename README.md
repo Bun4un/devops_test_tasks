@@ -1,69 +1,135 @@
-# devops_test_tasks
+# MyProject Deployment
 
-This repository contains solutions for the DevOps test tasks. The tasks are related to Bash scripting, CI/CD, and automation using GitHub Actions, Ansible, and more.
+This repository contains the solution for deploying a Django application with a PostgreSQL database, using Nginx as a reverse proxy. The deployment is automated with Ansible, and it includes a basic healthcheck API for monitoring the system's status.
 
-**Clone the repository:**
+## Project Structure
 
-
-    git clone https://github.com/Bun4un/devops_test_tasks
- 
-
-
-## Task #1: Debian Package Analyzer
-
-This task involves creating a Bash script to analyze `.deb` files and display package details and dependencies.
-
-### Script Overview
-
-The `analyze-deb.sh` script extracts and displays:
-- Package name
-- List of dependencies
-
-### Usage
-
-1. Make the script executable:
-    ```bash
-    chmod +x analyze-deb.sh
-    ```
-
-2. Run the script with a `.deb` file:
-    ```bash
-    ./analyze-deb.sh path_to_your_package.deb
-    ```
-
-### Example
-
-```bash
-$ ./analyze-deb.sh example_package.deb
-Package: example-package
-Dependencies:
-  - libexample1
-  - libexample2
+```plaintext
+myproject-deployment/
+│
+├── ansible/
+│   ├── playbook.yml               # Main Ansible playbook
+│   ├── inventory/
+│   │   └── hosts.ini             # Inventory file with server configuration
+│   ├── roles/
+│   │   ├── django/
+│   │   │   └── tasks/main.yml    # Django installation and configuration
+│   │   ├── nginx/
+│   │   │   └── tasks/main.yml    # Nginx setup and configuration
+│   │   └── postgresql/
+│   │       └── tasks/main.yml    # PostgreSQL installation and setup
+│   └── templates/
+│       └── nginx.conf.j2         # Jinja2 template for Nginx config
+│
+├── django/
+│   └── healthcheck_urls.py       # Django healthcheck API
+│
+├── requirements.txt              # Python dependencies
+└── README.md                     # Project documentation
 ```
+### Ansible Playbook
 
+The ansible/playbook.yml file is responsible for setting up the entire application stack on an Ubuntu server. It installs the following components:
 
-## Task #2: GitHub Actions for Automated Deployment
+    Django with Django REST Framework.
 
-This task involves creating a GitHub Actions workflow that triggers on commits to the main branch. The workflow deploys the repository to a remote server via FTP and updates a `VERSION.txt` file with the current commit information.
+    PostgreSQL as the database.
 
-### Workflow Overview
+    Nginx as a reverse proxy in front of Django.
 
-The `deploy.yaml` workflow does the following:
+The playbook is idempotent, meaning it can be run multiple times without causing errors or inconsistent states.
+Running the Playbook
 
-- Triggered on commits to the main branch.
-- Deploys files to a remote server via FTP using GitHub secrets.
-- Updates `VERSION.txt` with the latest commit hash and branch name.
+## To run the Ansible playbook:
 
-### Usage
+    Ensure you have Ansible installed on your local machine. If not, you can install it via pip:
 
-1. **Ensure your GitHub repository is connected to a remote server** and the necessary FTP credentials are stored in GitHub Secrets:
+## pip install ansible
 
-    - `FTP_SERVER`
-    - `FTP_USERNAME`
-    - `FTP_PASSWORD`
+## Clone the repository:
+```
+git clone https://github.com/Bun4un/devops_test_tasks/tree/ansible
+cd myproject-deployment
+```
+Configure your Ansible inventory file (e.g., hosts) with your target server's IP address or hostname.
 
-2. **On each commit to the main branch**, the GitHub Actions workflow will automatically deploy the files and update the `VERSION.txt` file.
+## Run the playbook:
 
-## Task #3: Ansible Playbook for Application Server Deployment
+    ansible-playbook -i hosts ansible/playbook.yml
 
-Documentation and other filres are located in 'myproject-deployment'.
+## Django Healthcheck API
+
+The django/healthcheck_urls.py file defines a simple healthcheck API endpoint that checks the operational status of the key components:
+
+    Nginx: Ensures the Nginx service is active.
+
+    Django: Verifies the Django application can connect to the PostgreSQL database.
+
+    PostgreSQL: Checks if PostgreSQL is running and accessible by Django.
+
+## Healthcheck Endpoint
+
+The healthcheck endpoint can be accessed at:
+
+### GET /healthcheck/
+
+It returns a JSON response indicating the status of each component:
+```
+{
+  "status": "OK",
+  "components": {
+    "nginx": "running",
+    "django": "running",
+    "postgresql": "running"
+  }
+}
+```
+Example Healthcheck Response
+
+If all components are running, the response will look like:
+```
+{
+  "status": "OK",
+  "components": {
+    "nginx": "running",
+    "django": "running",
+    "postgresql": "running"
+  }
+}
+```
+If any component is down, the status will be marked as "not running".
+Requirements
+
+To run the Django application and deploy the stack, you need to install the following dependencies:
+
+## Clone the repository:
+``
+git clone https://github.com/Bun4un/devops_test_tasks/tree/ansible
+cd myproject-deployment
+``
+Install the Python dependencies:
+
+    pip install -r requirements.txt
+
+## Dependencies
+
+requirements.txt contains the following packages:
+
+Django>=4.0,<5.0
+psycopg2>=2.9,<3.0
+gunicorn>=20.0,<21.0
+
+    Django: The web framework for building the application.
+
+    psycopg2: PostgreSQL database adapter for Python.
+
+    gunicorn: WSGI HTTP server for running Django in production.
+
+Nginx Configuration
+
+The ansible/nginx_config file contains the configuration for setting up Nginx as a reverse proxy for the Django application. It forwards requests to the Django application running with Gunicorn.
+Additional Notes
+
+The playbook and configuration are designed to work on Ubuntu 24.04.
+Ensure that your PostgreSQL database is properly configured and accessible by Django.
+For production, it's recommended to set up proper SSL certificates for Nginx using Let's Encrypt or any other certificate authority.
