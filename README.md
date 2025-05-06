@@ -43,13 +43,13 @@ Running the Playbook
 ## To run the Ansible playbook:
 
     Ensure you have Ansible installed on your local machine. If not, you can install it via pip:
-
-## pip install ansible
-
+```
+pip install ansible
+```
 ## Clone the repository:
 ```
-git clone https://github.com/Bun4un/devops_test_tasks/tree/ansible
-cd myproject-deployment
+git clone https://github.com/Bun4un/devops_test_tasks.git
+cd devops_test_tasks/ansible
 ```
 Configure your Ansible inventory file (e.g., hosts) with your target server's IP address or hostname.
 
@@ -102,11 +102,6 @@ Requirements
 
 To run the Django application and deploy the stack, you need to install the following dependencies:
 
-## Clone the repository:
-``
-git clone https://github.com/Bun4un/devops_test_tasks/tree/ansible
-cd myproject-deployment
-``
 Install the Python dependencies:
 
     pip install -r requirements.txt
