@@ -71,7 +71,7 @@ The django/healthcheck_urls.py file defines a simple healthcheck API endpoint th
 
 The healthcheck endpoint can be accessed at:
 
-### GET /healthcheck/
+# GET /healthcheck/
 
 It returns a JSON response indicating the status of each component:
 ```
