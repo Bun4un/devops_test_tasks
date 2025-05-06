@@ -42,7 +42,7 @@ Running the Playbook
 
 ## To run the Ansible playbook:
 
-    Ensure you have Ansible installed on your local machine. If not, you can install it via pip:
+Ensure you have Ansible installed on your local machine. If not, you can install it via pip:
 ```
 pip install ansible
 ```
